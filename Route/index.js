@@ -7,11 +7,9 @@ const Controller = require('../Controller/userDetails.js');
 var control = new Controller();
 app.use(bodyParser.json());
 
-var name = "";
 
 app.get('/rest/api/users/get/:un', async (req, res) => {
     let result = await control.getUserByUserName(req.params.un);
-    name = result.name;
     res.send(result);
 });
 
@@ -20,18 +18,13 @@ app.put('/rest/api/users/addAward/:un', async (req,res)=>{
     res.send(result);
 });
 
-app.put('/rest/api/users/changeAwardName/:un/:data/:newVal', async (req,res)=>{
-    let result = await control.updateAwardsName(req.params.un, req.params.data, req.params.newVal);
+app.put('/rest/api/users/changeAward/:un/:id', async (req,res)=>{
+    let result = await control.updateAwards(req.params.un, req.params.id, req.body);
     res.send(result);
 });
 
-app.put('/rest/api/users/changeAwardGiver/:un/:data/:newVal', async (req,res)=>{
-    let result = await control.updateAwardsAwardedBy(req.params.un, req.params.data, req.params.newVal);
-    res.send(result);
-});
-
-app.put('/rest/api/users/changeAwardYear/:un/:data/:newVal', async (req,res)=>{
-    let result = await control.updateAwardsYear(req.params.un, req.params.data, req.params.newVal);
+app.put('/rest/api/users/removeAward/:un/:id', async (req,res)=>{
+    let result = await control.removeAwards(req.params.un, req.params.id);
     res.send(result);
 });
 
@@ -40,8 +33,28 @@ app.put('/rest/api/users/addCertificate/:un', async (req,res)=>{
     res.send(result);
 });
 
+app.put('/rest/api/users/changeCertificate/:un/:id', async (req,res)=>{
+    let result = await control.updateCertifications(req.params.un, req.params.id, req.body);
+    res.send(result);
+});
+
+app.put('/rest/api/users/removeCertificate/:un/:id', async (req,res)=>{
+    let result = await control.removeCertifications(req.params.un, req.params.id);
+    res.send(result);
+});
+
 app.put('/rest/api/users/addPublication/:un', async (req,res)=>{
     let result = await control.addPublications(req.params.un, req.body);
+    res.send(result);
+});
+
+app.put('/rest/api/users/changePublication/:un/:id', async (req,res)=>{
+    let result = await control.updatePublications(req.params.un, req.params.id, req.body);
+    res.send(result);
+});
+
+app.put('/rest/api/users/removePublication/:un/:id', async (req,res)=>{
+    let result = await control.removePublications(req.params.un, req.params.id, req.body);
     res.send(result);
 });
 
@@ -62,6 +75,41 @@ app.put('/rest/api/users/deleteSkill/:un/:skill', async (req,res)=>{
 
 app.put('/rest/api/users/updateBio/:un', async (req,res)=>{
     let result = await control.updateBio(req.params.un, req.body);
+    res.send(result);
+});
+
+app.put('/rest/api/users/addExperience/:un', async (req,res)=>{
+    let result = await control.addExperience(req.params.un, req.body);
+    res.send(result);
+});
+
+app.put('/rest/api/users/updateExperience/:un/:id', async (req,res)=>{
+    let result = await control.updateExperience(req.params.un, req.params.id , req.body);
+    res.send(result);
+});
+
+app.put('/rest/api/users/removeExperience/:un/:id', async (req,res)=>{
+    let result = await control.removeExperience(req.params.un, req.params.id);
+    res.send(result);
+});
+
+app.put('/rest/api/users/addEducation/:un', async (req,res)=>{
+    let result = await control.addEducation(req.params.un, req.body);
+    res.send(result);
+});
+
+app.put('/rest/api/users/updateEducation/:un/:id', async (req,res)=>{
+    let result = await control.updateEducation(req.params.un, req.params.id , req.body);
+    res.send(result);
+});
+
+app.put('/rest/api/users/removeEducation/:un/:id', async (req,res)=>{
+    let result = await control.removeEducation(req.params.un, req.params.id);
+    res.send(result);
+});
+
+app.get('/rest/api/users/countConnection/:un', async(req,res)=>{
+    let result = await control.countConnection(req.params.un);
     res.send(result);
 });
 
