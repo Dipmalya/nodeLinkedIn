@@ -39,7 +39,9 @@ class Dao {
         }
     }
 
-    async update(collection, query, newValues, upsert) {
+    async update(collection, query, newValues, upsert, bool) {
+        if(bool == undefined)
+            bool = {};
         if(upsert == undefined)
             upsert = {};
         if (newValues == undefined || newValues == {})
@@ -76,6 +78,25 @@ class Dao {
             mongo.close()
         }
     }
+
+    async aggregate(collection, query) {
+        if (query == undefined)
+            query = []
+        let mongo = await mongoClient.connect(URL, { useNewUrlParser: true })
+        let result
+        try {
+            let db = mongo.db('linkedindemo')
+            result = (await db.collection(collection).aggregate(query).toArray())
+            return result
+        }
+        catch (err) {
+            throw err
+        }
+        finally {
+            mongo.close()
+        }
+    }
+    
 }
 
 module.exports = Dao
