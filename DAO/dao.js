@@ -3,6 +3,12 @@ const URL = 'mongodb://localhost:27017/linkedindemo'
 
 class Dao {
     
+    /*
+        @desc "mongo insert query"
+        @author : Dipmalya Sen
+        @param : {string} collection name, {object} query parameter
+        @return : db update response
+    */
     async insert(collection, obj) {
         if (obj == undefined || obj == {})
             throw "Object is Empty"
@@ -21,6 +27,12 @@ class Dao {
         }
     }
 
+    /*
+        @desc "mongo find query"
+        @author : Dipmalya Sen
+        @param : {string} collection name, {object} query parameter
+        @return : db update response
+    */
     async find(collection, query) {
         if (query == undefined)
             query = {}
@@ -39,6 +51,12 @@ class Dao {
         }
     }
 
+    /*
+        @desc "mongo update query"
+        @author : Soumyodipta Majumdar
+        @param : {string} collection name, {object} query parameter {object} query values {object} upsert parameter {object} boolean parameter
+        @return : db update response
+    */
     async update(collection, query, newValues, upsert, bool) {
         if(bool == undefined)
             bool = {};
@@ -61,6 +79,12 @@ class Dao {
         }
     }
 
+    /*
+        @desc "mongo delete query"
+        @author : Soumyodipta Majumdar
+        @param : {string} collection name, {object} query parameter
+        @return : db update response
+    */    
     async delete(collection, query) {
         if (query == undefined)
             query = {}
@@ -79,6 +103,12 @@ class Dao {
         }
     }
 
+    /*
+        @desc "mongo aggregate query"
+        @author : Dipmalya Sen
+        @param : {string} collection name, {object} query parameter
+        @return : db update response
+    */
     async aggregate(collection, query) {
         if (query == undefined)
             query = []
@@ -96,7 +126,7 @@ class Dao {
             mongo.close()
         }
     }
-    
+
 }
 
 module.exports = Dao
