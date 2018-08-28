@@ -4,7 +4,6 @@ const crypto = require("crypto");
 const dao = new Dao();
 
 class Controller {
-
     /*
         @desc : "When we click on any user's profile, this details will be brought to be displayed"
         @author :  Dipmalya Sen
@@ -13,7 +12,7 @@ class Controller {
     */
     async getUserByUserName(uName) {
         let objQuery = { userName: uName };
-        let result = await dao.find("demo", objQuery);
+        let result = await dao.find("users", objQuery);
         return result;
     }
 
@@ -27,7 +26,7 @@ class Controller {
         const id = crypto.randomBytes(16).toString("hex");
         let query = { userName: uName };
         let newValue = { $push: { "profile.accomplishment.awards": { $each: [{ "awardId": id, "name": obj.name, "awardedBy": obj.awardedBy, "year": obj.year }] } } };
-        let result = await dao.update("demo", query, newValue);
+        let result = await dao.update("users", query, newValue);
         return result;
     }
 
@@ -47,7 +46,7 @@ class Controller {
             }
         };
         let upsert = { "upsert": true };
-        let result = await dao.update("demo", query, newValue, upsert);
+        let result = await dao.update("users", query, newValue, upsert);
         return result;
     }
 
@@ -62,7 +61,7 @@ class Controller {
         let newValue = { $pull: { "profile.accomplishment.awards": { "awardId": id } } };
         let upsert = false;
         let bool = true;
-        let result = await dao.update("demo", query, newValue, upsert, bool);
+        let result = await dao.update("users", query, newValue, upsert, bool);
         return result;
     }
 
@@ -76,7 +75,7 @@ class Controller {
         const id = crypto.randomBytes(16).toString("hex");
         let query = { userName: uName };
         let newValue = { $push: { "profile.accomplishment.certifications": { $each: [{ "certificateId": id, "name": obj.name, "issuedBy": obj.issuedBy, "year": obj.year }] } } };
-        let result = await dao.update("demo", query, newValue);
+        let result = await dao.update("users", query, newValue);
         return result;
     }
 
@@ -96,7 +95,7 @@ class Controller {
             }
         };
         let upsert = { "upsert": true };
-        let result = await dao.update("demo", query, newValue, upsert);
+        let result = await dao.update("users", query, newValue, upsert);
         return result;
     }
 
@@ -111,7 +110,7 @@ class Controller {
         let newValue = { $pull: { "profile.accomplishment.certifications": { "certificateId": id } } };
         let upsert = false;
         let bool = true;
-        let result = await dao.update("demo", query, newValue, upsert, bool);
+        let result = await dao.update("users", query, newValue, upsert, bool);
         return result;
     }
 
@@ -125,7 +124,7 @@ class Controller {
         const id = crypto.randomBytes(16).toString("hex");
         let query = { userName: uName };
         let newValue = { $push: { "profile.accomplishment.publications": { $each: [{ "publicationId": id, "name": obj.name, "topic": obj.topic, "publishedBy": obj.publishedBy, "year": obj.year }] } } };
-        let result = await dao.update("demo", query, newValue);
+        let result = await dao.update("users", query, newValue);
         return result;
     }
 
@@ -146,7 +145,7 @@ class Controller {
             }
         };
         let upsert = { "upsert": true };
-        let result = await dao.update("demo", query, newValue, upsert);
+        let result = await dao.update("users", query, newValue, upsert);
         return result;
     }
 
@@ -161,7 +160,7 @@ class Controller {
         let newValue = { $pull: { "profile.accomplishment.publications": { "publicationId": id } } };
         let upsert = false;
         let bool = true;
-        let result = await dao.update("demo", query, newValue, upsert, bool);
+        let result = await dao.update("users", query, newValue, upsert, bool);
         return result;
     }
 
@@ -183,7 +182,7 @@ class Controller {
                 }
             }
         };
-        let result = await dao.update("demo", query, newValue);
+        let result = await dao.update("users", query, newValue);
         return result;
     }
 
@@ -196,7 +195,7 @@ class Controller {
     async addSkill(uName, skill) {
         let query = { userName: uName };
         let newValue = { $push: { "profile.skills": skill } };
-        let result = await dao.update("demo", query, newValue);
+        let result = await dao.update("users", query, newValue);
         return result;
     }
 
@@ -209,7 +208,7 @@ class Controller {
     async deleteSkill(uName, skill) {
         let query = { userName: uName };
         let newValue = { $pull: { "profile.skills": { $in: [skill] } } };
-        let result = await dao.update("demo", query, newValue);
+        let result = await dao.update("users", query, newValue);
         return result;
     }
 
@@ -223,7 +222,7 @@ class Controller {
         let query = { userName: uName };
         let newValue = { $set: { "profile.bio": obj.bio } };
         let upsert = { "upsert": true };
-        let result = await dao.update("demo", query, newValue, upsert);
+        let result = await dao.update("users", query, newValue, upsert);
         return result;
     }
 
@@ -246,7 +245,7 @@ class Controller {
             }
         }
         let upsert = { "upsert": true };
-        let result = await dao.update("demo", query, newValue, upsert);
+        let result = await dao.update("users", query, newValue, upsert);
         return result;
     }
 
@@ -266,7 +265,7 @@ class Controller {
             }
         };
         let upsert = { "upsert": true };
-        let result = await dao.update("demo", query, newValue, upsert);
+        let result = await dao.update("users", query, newValue, upsert);
         return result;
     }
 
@@ -281,7 +280,7 @@ class Controller {
         let newValue = { $pull: { "profile.experience": { "experienceId": id } } };
         let upsert = false;
         let bool = true;
-        let result = await dao.update("demo", query, newValue, upsert, bool);
+        let result = await dao.update("users", query, newValue, upsert, bool);
         return result;
     }
 
@@ -304,7 +303,7 @@ class Controller {
             }
         }
         let upsert = { "upsert": true };
-        let result = await dao.update("demo", query, newValue, upsert);
+        let result = await dao.update("users", query, newValue, upsert);
         return result;
     }
 
@@ -325,7 +324,7 @@ class Controller {
             }
         };
         let upsert = { "upsert": true };
-        let result = await dao.update("demo", query, newValue, upsert);
+        let result = await dao.update("users", query, newValue, upsert);
         return result;
     }
 
@@ -340,7 +339,7 @@ class Controller {
         let newValue = { $pull: { "profile.education": { "educationId": id } } };
         let upsert = false;
         let bool = true;
-        let result = await dao.update("demo", query, newValue, upsert, bool);
+        let result = await dao.update("users", query, newValue, upsert, bool);
         return result;
     }
 
@@ -352,11 +351,86 @@ class Controller {
     */
     async countConnection(uName) {
         let query = [{ $match: { "userName": uName } }, { $project: { count: { $size: "$connections" }, "_id": 0 } }]
-        let result = await dao.aggregate("demo", query);
+        let result = await dao.aggregate("users", query);
         return result;
     }
 
+    /*
+        @desc "This function will update Name(according to user) passed to the user's profile.. When we click on updateName() then, the entered detail will be updated to the user's profile"
+        @author : Somya Burman
+        @param : {string} user name, {obj} name
+        @return : db update response
+    */
 
+    async updateName(uName, obj) {
+        let query = { "userName": uName };
+        let newValue = {
+            $set: {
+                "name": obj.name
+            }
+        };
+        let upsert = { "upsert": true };
+        let result = await dao.update("users", query, newValue, upsert);
+        return result;
+    }
+
+    /*
+        @desc "This function will update DOB(according to user) passed to the user's profile.. When we click on updateDOB() then, the entered detail will be updated to the user's profile"
+        @author : Somya Burman
+        @param : {string} user name, {obj} dateOfBith
+        @return : db update response
+    */
+
+    async updateDOB(uName, obj) {
+        let query = { "userName": uName };
+        let newValue = {
+            $set: {
+                "dateOfBirth": obj.dateOfBirth
+            }
+        };
+        let upsert = { "upsert": true };
+        let result = await dao.update("users", query, newValue, upsert);
+        return result;
+    }
+
+    /*
+        @desc "This function will update Email(according to user) passed to the user's profile.. When we click on updateEmail() then, the entered detail will be updated to the user's profile"
+        @author : Somya Burman
+        @param : {string} user name, {obj} email
+        @return : db update response
+    */
+
+    async updateEmail(uName, obj) {
+        let query = { "userName": uName };
+        let newValue = {
+            $set: {
+                "email": obj.email
+            }
+        };
+        let upsert = { "upsert": true };
+        let result = await dao.update("users", query, newValue, upsert);
+        return result;
+    }
+
+    /*
+        @desc "This function will update Mobile(according to user) passed to the user's profile.. When we click on updateMobile() then, the entered detail will be updated to the user's profile"
+        @author : Somya Burman
+        @param : {string} user name, {obj} mobile
+        @return : db update response
+    */
+
+    async updateMobile(uName, obj) {
+        let query = { "userName": uName };
+        let newValue = {
+            $set: {
+                "mobile": obj.mobile
+            }
+        };
+        let upsert = { "upsert": true };
+        let result = await dao.update("users", query, newValue, upsert);
+        return result;
+    }
+    
 }
 
 module.exports = Controller;
